@@ -17,7 +17,12 @@ public class ReservationService {
     private final ReservationMapper reservationMapper;
 
     public ReservationDTO bookReservation(CreateReservationRequestDTO createReservationRequestDTO) {
-        throw new UnsupportedOperationException();
+    	
+    	try {
+    		return reservationMapper.map(reservationRepository.saveAndFlush(reservationMapper.map(createReservationRequestDTO)));
+    	}catch (UnsupportedOperationException x) {
+    		throw x;	
+    	}
     }
 
     public ReservationDTO findReservation(Long reservationId) {
